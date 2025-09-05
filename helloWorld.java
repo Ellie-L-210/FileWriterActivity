@@ -1,3 +1,7 @@
+package FileWriterActivity;
+
 public class helloWorld {
-    System.out.print("hello world!");
+    public static void main(String[] args) {
+        System.out.print("hello world!");
+    }
 }
