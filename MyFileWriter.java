@@ -29,4 +29,19 @@ public class MyFileWriter {
         }
     }
 
+    // Calculate and print the file size using the File class
+    private static void printFileSize(String fileName) {
+        File current = new File(fileName);
+        long length = current.length();
+        System.out.println(length);
+    }
+
+    public static void main(String[] args) {
+        File file1 = new File("testfile1.txt");
+        File file2 = new File("testfile2.txt");
+
+        printFileSize(file1.getName());
+        printFileSize(file2.getName());
+    }
+
 }
