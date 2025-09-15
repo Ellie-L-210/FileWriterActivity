@@ -36,12 +36,31 @@ public class MyFileWriter {
         System.out.println(length);
     }
 
-    public static void main(String[] args) {
+    /**
+     * Reads a text file and returns its contents as a string.
+     * 
+     * @param filePath the path to the file
+     * @return the contents of the file as a string
+     * @throws IOException if an I/O error occurs
+     */
+    public static String stringify(String filePath) throws IOException {
+        File current = new File(filePath);
+        BufferedReader br = new BufferedReader(new FileReader(current));
+        String output = "";
+        while (br.ready()) {
+            output += (char) br.read();
+        }
+        br.close();
+        return output;
+    }
+
+    public static void main(String[] args) throws IOException {
         File file1 = new File("testfile1.txt");
         File file2 = new File("testfile2.txt");
 
-        printFileSize(file1.getName());
-        printFileSize(file2.getName());
+        // printFileSize(file1.getName());
+        // printFileSize(file2.getName());
+        System.out.println(stringify(file1.getPath()));
     }
 
 }
