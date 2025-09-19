@@ -1,7 +1,10 @@
 package FileWriterActivity;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.nio.file.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
 
 public class MyFileWriter {
@@ -52,6 +55,36 @@ public class MyFileWriter {
         }
         br.close();
         return output;
+    }
+
+    public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
+        // Static getInstance method is called with hashing SHA
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+        // digest() method called
+        // to calculate message digest of an input
+        // and return array of byte
+        return md.digest(input.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static String hashFile(String filePath) {
+        try {
+            File current = new File(filePath);
+            BufferedReader br = new BufferedReader(new FileReader(current));
+            String hashInput = "";
+            while (br.ready()) {
+                hashInput += br.read();
+            }
+            BigInteger num = new BigInteger(getSha(hashInput));
+            StringBuilder hexFormat = new StringBuilder(num.toString(16));
+            br.close();
+            return hexFormat.toString();
+        } catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException");
+        } catch (IOException e) {
+            System.out.println("IOException");
+        }
+
     }
 
     public static void main(String[] args) throws IOException {
